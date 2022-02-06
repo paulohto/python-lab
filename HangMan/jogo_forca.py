@@ -12,11 +12,9 @@ for x in f2: # removendo \n da lista no arquivo txt
         f3.append(y.strip()) # nova lista sem \n
 
 segredo = random.choice(f3) # escolha aletoria de palavras
-tamanho_seg = len(segredo) # tamanho da palavra 
 
-print("SEGREDO:", segredo)
+# print("SEGREDO:", segredo) # teste de palavra
 
-## 
 erro = [] # Lista para armazenar erros
 acerto = [] # Lista para armazenar acertos
 nova_forca = [] # Lista para icluir mebros do corpo que estão sendo enforcados
@@ -46,9 +44,9 @@ def forc(n,i): # função para mostrar os elementos enforcados
     for n in erro:
         if n not in segredo:
             while x <= i:
-                fc += str(x+1) + " " + nova_forca[x]+"\n"
+                fc += str(x+1) + " - " + nova_forca[x]+"\n"
                 x += 1
-    return "# você está sendo enforcado, tentativas restantes: " + str(len(forca)-x) + " # \n" + fc
+    return "\n# você está sendo enforcado, tentativas restantes: " + str(len(forca)-x) + " # \n" + fc
 
 def resultado(): # função para mostrar se venceu ou perdeu
     resultado = ""
@@ -59,17 +57,17 @@ def resultado(): # função para mostrar se venceu ou perdeu
     return resultado
 
 ################### - JOGO - ##########################
-
+print('''\nBEM VINDO AO TRADICIONAL JOGO DA FORCA! 
+Adivinhe a palavra secreta em 4 tentantivas! \n''')
 c = 0
-z = 0
 while ( c < len(forca) ):
-    n = str(input("tentativa: "))
+    n = str(input("Tentativa: "))
     adivinha(n,c)
     print ( ocultado(n) )
 
     while (True):
         if (n in acerto and set(segredo) != set(acerto)):
-            n = str(input("tentativa: "))
+            n = str(input("Tentativa: "))
             adivinha(n,c)
             print ( ocultado(n) )
 
@@ -78,8 +76,8 @@ while ( c < len(forca) ):
                 break
         else:
             break
-    
-    if (n not in segredo):
+       
+    if (n not in segredo or n in erro):
         print ( forc(n,c) )
 
     if ( set(segredo) == set(acerto) ):
@@ -87,6 +85,9 @@ while ( c < len(forca) ):
        
     c += 1
 
-print ("\n# RESULTADO DO JOGO: " + resultado() + " \n")
-
-
+if resultado() == "VENCEU":
+    print ("\nRESULTADO DO JOGO: " + resultado())
+    print ("A PALAVRA SECRETA ERA: " + segredo.upper() + "\n")
+else:
+    print ("\nRESULTADO DO JOGO: " + resultado())
+    print ("A PALAVRA SECRETA ERA: " + segredo.upper() + "\n")
