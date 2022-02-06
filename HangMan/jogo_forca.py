@@ -12,7 +12,6 @@ for x in f2: # removendo \n da lista no arquivo txt
         f3.append(y.strip()) # nova lista sem \n
 
 segredo = random.choice(f3) # escolha aletoria de palavras
-
 # print("SEGREDO:", segredo) # teste de palavra
 
 erro = [] # Lista para armazenar erros
@@ -22,7 +21,7 @@ nova_forca = [] # Lista para icluir mebros do corpo que estão sendo enforcados
 def adivinha(n,i): # função para adivinhar letras
     if n in segredo and n not in acerto:
         acerto.append(n)
-    elif n not in segredo and n not in erro:
+    elif n not in segredo and n not in erro or n in erro: # n in erro para caso o usuário repita a letra
         erro.append(n)
         nova_forca.append(forca[i])
     else:
@@ -82,7 +81,6 @@ while ( c < len(forca) ):
 
     if ( set(segredo) == set(acerto) ):
         break
-       
     c += 1
 
 if resultado() == "VENCEU":
